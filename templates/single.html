@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}{{ article.title }} | Blog | {{ block.super }}{% endblock%}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+  <li><a href="/">Домашня</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'articles-index' %}">Всі</a> <span class="divider">/</span></li>
+  <li class="active">{{ article.title }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span9">
+        <h3>{{ article.title }}</h3>
+        <p class="meta">{{ article.date_publish|date:"F j, Y" }}</p>
+        {{ article.content_markup|safe }}
+    <div class="span3">
+        <ul class="nav nav-list">
+        {% if archive_dates|length > 0%}
+            <li class="nav-header">Архів по датам</li>
+            {% for date in archive_dates %}
+            <li><a href="{% url 'articles-date-archive' month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y" }}</a></li>
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

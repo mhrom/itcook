@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load static %}
+
+{% block title %}Архів: {{ start|date:"d M Y" }} to {{ end|date:"d M Y" }} | Домашня | {{ block.super }}{% endblock%}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+  <li><a href="/">Домашня</a> <span class="divider">/</span></li>
+  <li class="active">Архів: {{ start|date:"d M Y" }} to {{ end|date:"d M Y" }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span9">
+        <h3>Архів: {{ start|date:"d M Y" }} to {{ end|date:"d M Y" }}</h3>
+        {% for article in articles %}
+        <article class="news-item">
+            <h4 class="title"><a href="{% url 'articles-single' slug=article.slug %}">{{ article.title }}</a></h4>
+            <div class="meta">{{ article.date_publish|date:"F j, Y" }}</div>
+            <div class="text">
+                <p>{{ article.excerpt|safe }}</p>
+            </div>
+        </article>
+        {% endfor %}
+        <div class="pagination pagination-sm">
+            <ul class="pager">
+                {% if articles.has_previous %}
+                <li class="previous"><a href="?page={{ articles.previous_page_number }}">Попередня</a></li>
+                {% else %}
+                <li class="disabled"><span>Попередня</span></li>
+                {% endif %}
+
+                <li class="active"><span>{{ articles.number }}</span></li>
+
+                {% if articles.has_next %}
+                <li class="next"><a href="?page={{ articles.next_page_number }}"></a>Наступна</li>
+                {% else %}
+                <li class="disabled"><span>Наступна</span></li>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    <div class="span3">
+        <ul class="nav nav-list">
+        {% if archive_dates|length > 0%}
+            <li class="nav-header">Архівні Дати</li>
+            {% for date in archive_dates %}
+            <li{% if date.month == start.month and date.year == start.year %} class="active"{% endif %}><a href="{% url 'articles-date-archive' month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y" }}</a></li>
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

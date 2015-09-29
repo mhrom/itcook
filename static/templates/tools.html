@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load static %}
+
+{% block title %}Blog | Manuals and Posts {{ block.super }}{% endblock%}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+  <li><a href="/"> Домашня </a> <span class="divider">/</span></li>
+  <li class="active">Останні за місяць</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+        <div id="wrap">
+
+            <!-- Begin page content -->
+            <div class="container">
+                <div class="masthead">
+                    <ul class="nav nav-pills pull-left">
+                        <li{% if "/" == request.get_full_path %} class="active"{% endif %}><a href="{% url 'home' %}">Домашня</a></li>
+                        <li{% if "/tools" == request.get_full_path %} class="active"{% endif %}><a href="{% url 'tools' %}">Інструменти</a></li>
+                        <li{% if "/articles" == request.get_full_path %} class="active"{% endif %}><a href="{% url 'articles-index' %}">Архів</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
