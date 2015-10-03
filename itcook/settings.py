@@ -67,7 +67,7 @@ STATICFILES_FINDERS = (
         'django.contrib.staticfiles.finders.DefaultStorageFinder',
     )
 
-ROOT_URLCONF = 'itcook.urls'
+ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'itcook.wsgi.application'
 
