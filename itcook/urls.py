@@ -13,5 +13,5 @@ urlpatterns = patterns('',
     url(r'^articles/$', 'articles.views.index', name='articles-index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^comments/', include('django.contrib.comments.urls')),
-    url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^ckeditor_uploader/', include('ckeditor_uploader.urls')),
 )
