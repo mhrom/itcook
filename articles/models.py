@@ -5,8 +5,8 @@ from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     """Category Model"""
-    title = RichTextField(config_name='small', verbose_name = _(u'Title'), help_text = _(u' '), max_length = 255)
-    slug = models.SlugField(verbose_name = _(u'Slug'), help_text = _(u'Uri identifier.'), max_length = 255, unique = True)
+    title = models.CharField(verbose_name=_(u'Title'), help_text=_(u' '), max_length=255)
+    slug = models.SlugField(verbose_name=_(u'Slug'), help_text=_(u'Uri identifier.'), max_length=255, unique=True)
 
     class Meta:
         app_label = _(u'articles')
@@ -17,14 +17,14 @@ class Category(models.Model):
     def __unicode__(self):
         return "%s" % (self.title,)
 
-class Article(models.Model) :
+class Article(models.Model):
     """Article Model"""
-    title = RichTextField ( config_name='small', verbose_name = _(u'Title'), help_text = _(u' '),max_length = 255)
-    slug = models.SlugField(verbose_name = _(u'Slug'),help_text = _(u'Uri identifier.'),max_length = 255,unique = True)
-    content_markdown = RichTextField(verbose_name = _(u'Content (Markdown)'),help_text = _(u' '),)
-    content_markup = RichTextField(verbose_name = _(u'Content (Markup)'),help_text = _(u' '),)
-    categories = models.ManyToManyField(Category,verbose_name = _(u'Categories'),help_text = _(u' '),null = True,blank = True)
-    date_publish = models.DateTimeField(verbose_name = _(u'Publish Date'),help_text = _(u' '))
+    title = models.CharField (verbose_name=_(u'Title'), help_text=_(u' '), max_length=255)
+    slug = models.SlugField(verbose_name=_(u'Slug'), help_text=_(u'Uri identifier.'), max_length=255, unique=True)
+    content_markdown = RichTextField(verbose_name=_(u'Content (Markdown)'), help_text=_(u' '),)
+    content_markup = RichTextField(verbose_name=_(u'Content (Markup)'), help_text=_(u' '),)
+    categories = models.ManyToManyField(Category, verbose_name=_(u'Categories'), help_text=_(u' '), null=True, blank=True)
+    date_publish = models.DateTimeField(verbose_name=_(u'Publish Date'), help_text=_(u' '))
 
     class Meta:
         app_label = _(u'articles')

@@ -2,12 +2,10 @@
 
 from django.contrib import admin
 from django import forms
-from ckeditor.widgets import CKEditorWidget
 from pagedown.widgets import AdminPagedownWidget
 from articles.models import Category, Article
 
 class ArticleForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Article
         widgets = {
